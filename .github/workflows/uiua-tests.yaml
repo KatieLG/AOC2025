@@ -1,0 +1,30 @@
+name: Uiua tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./uiua
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Install Rust and Cargo
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Install Uiua
+      run: cargo install uiua --version 0.17.2
+
+    - name: Run uiua tests
+      run: uiua run tests/test_solutions.ua
+      env:
+        UIUA_RECURSION_LIMIT: 1000

@@ -1,0 +1,27 @@
+Expected ← (
+  [{} # day 1
+  ]
+)
+SolutionMap ← map+1⇡⊸⧻Expected
+GetSolution ← get⊙SolutionMap
+
+TestDay ← (
+  ⟜(&p $"Executing tests for day _" ↙₋₂$"0_")
+  GetSolution                                   # get the correct solution
+  ⊃(⊙⋅∘°□⊢|⊙∘°□⊣)                               # align actual & expected output
+  ⍤.≍                                           # assert part a is correct
+  ⍤.≍                                           # assert part b is correct
+  &p $"Tests passed with runtime: _s\n" ⁅₃¯-now # output runtime
+)
+
+NoSolution ← "No Solution"
+TooLong    ← "Runtime too long"
+Missingb   ← "Missing part b"
+SkipDay ← (
+  &p $"Skipping tests for day _: _\n" ↙₋₂$"0_" # skip with reason
+)
+
+# ---- Tests -----
+# now
+# ~ "../solutions/day01.ua"
+# TestDay 1
