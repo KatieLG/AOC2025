@@ -63,9 +63,10 @@ def create_solution_file(day: int, answer_a: str | None, answer_b: str | None) -
 def fetch_puzzle_data(day: int, year: int) -> tuple[str | None, str | None]:
     """Fetch and save the puzzle input and sample data. Returns (answer_a, answer_b)."""
     data_dir = DATA_DIR / f"day_{day:02d}"
-    data_dir.mkdir(parents=True, exist_ok=True)
 
     data = get_data(day=day, year=year)
+    data_dir.mkdir(parents=True, exist_ok=True)
+
     dataset_file = data_dir / "data.txt"
     dataset_file.write_text(data, encoding="utf-8")
     typer.echo(f"Fetched puzzle data: {dataset_file}")
