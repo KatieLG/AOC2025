@@ -14,11 +14,7 @@ def _load_module(name: str) -> ModuleType | None:
         return None
 
 
-MODULES = [
-    module
-    for day in range(1, 13)
-    if (module := _load_module(f"solutions.day_{day:02d}"))
-]
+MODULES = [module for day in range(1, 13) if (module := _load_module(f"solutions.day_{day:02d}"))]
 
 
 @pytest.mark.parametrize("module", MODULES)

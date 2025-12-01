@@ -8,11 +8,9 @@ class Day01(AOCSolution):
     }
 
     @property
-    def parsed_data(self):
+    def parsed_data(self) -> list[tuple[int, int]]:
         """Return tuple of direction and clicks"""
-        return [
-            (-1 if row[0] == "L" else 1, int(row[1:])) for row in self.data.splitlines()
-        ]
+        return [(-1 if row[0] == "L" else 1, int(row[1:])) for row in self.data.splitlines()]
 
     def part_one(self) -> int:
         """How many times the dial lands on 0 after turning"""

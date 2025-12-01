@@ -31,3 +31,8 @@ dev = [
     "ruff>=0.14.6",
     "ty>=0.0.1a28",
 ]
+
+[tool.ruff]
+line-length = 100
+lint.select = ["B", "C4", "RSE", "PTH", "N", "PLC", "F", "ANN", "I", "TID", "RET", "SIM"]
+

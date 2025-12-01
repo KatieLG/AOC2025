@@ -33,12 +33,12 @@ class AOCSolution(ABC):
         folder = f"data/day_{self.day:02d}"
         filename = "sample" if dataset == Dataset.SAMPLE else "data"
         self.sample = dataset == Dataset.SAMPLE
-        self.data = Path(self.root, f"{folder}/{filename}.txt").read_text(
-            encoding="utf-8"
-        )
+        self.data = Path(self.root, f"{folder}/{filename}.txt").read_text(encoding="utf-8")
         self.__post_init__()
 
-    def __post_init__(self) -> None: ...
+    def __post_init__(self) -> None:
+        """Optional post-init code"""
+        return
 
     @abstractmethod
     def part_one(self) -> int | str: ...

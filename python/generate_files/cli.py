@@ -52,9 +52,7 @@ def create_solution_file(day: int, answer_a: str | None, answer_b: str | None) -
         return
 
     solution_file_path.write_text(
-        SOLUTION_TEMPLATE.format(
-            day_padded=day_padded, answer_a=answer_a, answer_b=answer_b
-        ),
+        SOLUTION_TEMPLATE.format(day_padded=day_padded, answer_a=answer_a, answer_b=answer_b),
         encoding="utf-8",
     )
     typer.echo(f"Created solution file: {solution_file_path}")
