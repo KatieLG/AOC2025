@@ -27,10 +27,10 @@ class Day01(AOCSolution):
         position = 50
         zeroes = 0
         for direction, clicks in self.parsed_data:
-            for _ in range(clicks):
-                position += direction
-                position %= 100
-                zeroes += position == 0
+            clicks_to_next_zero = (-direction * position) % 100
+            zeroes += -((clicks_to_next_zero - clicks) // 100)
+            position += clicks * direction
+            position %= 100
         return zeroes
 
 
