@@ -2,9 +2,13 @@ name: Uiua tests
 
 on:
   push:
-    branches: [ "main" ]
+    paths:
+      - uiua/**
+      - .github/workflows/uiua-tests.yaml
   pull_request:
-    branches: [ "main" ]
+    paths:
+      - uiua/**
+      - .github/workflows/uiua-tests.yaml
 
 permissions:
   contents: read
