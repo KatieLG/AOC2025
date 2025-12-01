@@ -1,5 +1,5 @@
 Expected ← (
-  [{} # day 1
+  [{1023 5899} # day 1
   ]
 )
 SolutionMap ← map+1⇡⊸⧻Expected
@@ -22,6 +22,6 @@ SkipDay ← (
 )
 
 # ---- Tests -----
-# now
-# ~ "../solutions/day01.ua"
-# TestDay 1
+now
+~ "../solutions/day_01.ua"
+TestDay 1
