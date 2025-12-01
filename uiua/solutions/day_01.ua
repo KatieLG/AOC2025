@@ -1,6 +1,6 @@
 ~ "../helpers/input.ua" ~ ReadInput
 
-Parse ← ×+1¯×2=@L⊃(⊢|⋕↘₁) # Multiply clicks by direction
+Parse ← -1×2=@R⊙⋕°⊂ # Get direction and clicks
 
 Data ← (
   ReadInput "day_01" # Read in
@@ -14,7 +14,7 @@ C ← (
 )
 
 # Part A
-C Data 50
+C×Data 50
 
 # Part B
-C ▽⊃⌵±Data 50 # use keep to split into individual clicks
+C˜▽Data 50 # use keep to split into individual clicks
