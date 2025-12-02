@@ -1,10 +1,10 @@
-from models.aoc_solution import AOCSolution
+from models.aoc_solution import AOCSolution, Dataset, Part
 
 
 class Day01(AOCSolution):
     EXPECTED = {
-        "part_one": {"sample": 3, "data": 1023},
-        "part_two": {"sample": 6, "data": 5899},
+        Part.PART_ONE: {Dataset.SAMPLE: 3, Dataset.DATA: 1023},
+        Part.PART_TWO: {Dataset.SAMPLE: 6, Dataset.DATA: 5899},
     }
 
     @property

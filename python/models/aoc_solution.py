@@ -2,7 +2,6 @@ import sys
 from abc import ABC, abstractmethod
 from enum import StrEnum
 from pathlib import Path
-from typing import TypedDict
 
 
 class Dataset(StrEnum):
@@ -15,13 +14,8 @@ class Part(StrEnum):
     PART_TWO = "part_two"
 
 
-class ExpectedResult(TypedDict):
-    sample: str | int | None
-    data: str | int | None
-
-
 class AOCSolution(ABC):
-    EXPECTED: dict[Part, ExpectedResult]
+    EXPECTED: dict[Part, dict[Dataset, str | int | None]] = {}
 
     def __init__(self) -> None:
         self.day = int(self.__class__.__name__.replace("Day", ""))

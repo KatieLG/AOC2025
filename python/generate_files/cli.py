@@ -14,13 +14,13 @@ ROOT_DIR = Path(__file__).parent.parent.parent
 SOLUTION_DIR = ROOT_DIR / "python" / "solutions"
 DATA_DIR = ROOT_DIR / "data"
 
-SOLUTION_TEMPLATE = '''from models.aoc_solution import AOCSolution
+SOLUTION_TEMPLATE = '''from models.aoc_solution import AOCSolution, Dataset, Part
 
 
 class Day{day_padded}(AOCSolution):
     EXPECTED = {{
-        "part_one": {{"sample": {answer_a}, "data": None}},
-        "part_two": {{"sample": {answer_b}, "data": None}},
+        Part.PART_ONE: {{Dataset.SAMPLE: {answer_a}, Dataset.DATA: None}},
+        Part.PART_TWO: {{Dataset.SAMPLE: {answer_b}, Dataset.DATA: None}},
     }}
 
     @property
