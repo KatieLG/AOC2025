@@ -10,8 +10,8 @@ TestDay ← (
   ⟜(&p $"Executing tests for day _" ↙₋₂$"0_")
   GetSolution                                   # get the correct solution
   ⊃(⊙⋅∘°□⊢|⊙∘°□⊣)                               # align actual & expected output
-  ⍤.≍                                           # assert part a is correct
-  ⍤.≍                                           # assert part b is correct
+  ˙⍤≍                                           # assert part a is correct
+  ˙⍤≍                                           # assert part b is correct
   &p $"Tests passed with runtime: _s\n" ⁅₃¯-now # output runtime
 )
 
