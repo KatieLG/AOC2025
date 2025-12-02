@@ -8,21 +8,16 @@ class Day02(AOCSolution):
     }
 
     @staticmethod
-    def is_single_repeat(number: int) -> bool:
-        """Check if the number is formed from a repeat of one other number"""
+    def is_invalid(number: int) -> bool:
+        """Check if the number is exactly two repeats of a substring"""
         strnum = str(number)
         length = len(strnum)
         return length % 2 == 0 and strnum[: length // 2] == strnum[length // 2 :]
 
     @staticmethod
     def is_repeated_substring(number: int) -> bool:
-        """Check if the number is formed from some amount of repeated sub-numbers"""
-        strnum = str(number)
-        length = len(strnum)
-        for j in range(1, length):
-            if length % j == 0 and len({strnum[k : k + j] for k in range(0, length, j)}) == 1:
-                return True
-        return False
+        """Check if the number is formed from repeating substrings"""
+        return str(number) in f"{number}{number}"[1:-1] 
 
     @property
     def parsed_data(self) -> set[int]:
@@ -35,7 +30,7 @@ class Day02(AOCSolution):
 
     def part_one(self) -> int:
         """Solve part one."""
-        return sum(pid for pid in self.parsed_data if self.is_single_repeat(pid))
+        return sum(pid for pid in self.parsed_data if self.is_invalid(pid))
 
     def part_two(self) -> int:
         """Solve part two."""
