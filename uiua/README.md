@@ -1,6 +1,6 @@
 # Uiua Solutions
 
-Advent of Code solutions written in [Uiua](https://www.uiua.org/) version 0.17.2.
+Advent of Code solutions written in [Uiua](https://www.uiua.org/) version 0.18.0-dev.3
 
 ## Running Solutions
 

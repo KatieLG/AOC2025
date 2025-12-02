@@ -20,15 +20,15 @@ jobs:
       run:
         working-directory: ./uiua
     steps:
-    - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
-    - name: Install Rust and Cargo
-      uses: dtolnay/rust-toolchain@stable
+      - name: Install Rust and Cargo
+        uses: dtolnay/rust-toolchain@stable
 
-    - name: Install Uiua
-      run: cargo install uiua --version 0.17.2
+      - name: Install Uiua
+        run: cargo install uiua --version 0.18.0-dev.3
 
-    - name: Run uiua tests
-      run: uiua run tests/test_solutions.ua
-      env:
-        UIUA_RECURSION_LIMIT: 1000
+      - name: Run uiua tests
+        run: uiua run tests/test_solutions.ua
+        env:
+          UIUA_RECURSION_LIMIT: 1000

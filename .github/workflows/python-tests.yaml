@@ -20,19 +20,19 @@ jobs:
       run:
         working-directory: ./python
     steps:
-    - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
-    - name: Install uv
-      uses: astral-sh/setup-uv@v7
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
-    - name: Set up Python
-      run: uv python install
+      - name: Set up Python
+        run: uv python install
 
-    - name: Install requirements
-      run: uv sync
+      - name: Install requirements
+        run: uv sync
 
-    - name: Lint
-      run: make lint
+      - name: Lint
+        run: make lint
 
-    - name: Test
-      run: make test
+      - name: Test
+        run: make test
