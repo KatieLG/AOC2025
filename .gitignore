@@ -58,3 +58,6 @@ venv.bak/
 
 # PyPI configuration file
 .pypirc
+
+# Node modules
+node_modules/

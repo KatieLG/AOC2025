@@ -4,3 +4,4 @@ Advent of Code 2025 Solutions
 
 - [Python Solutions](/python/solutions/)
 - [Uiua Solutions](/uiua/solutions/)
+- [Typescript Solutions](/typescript/solutions/)
