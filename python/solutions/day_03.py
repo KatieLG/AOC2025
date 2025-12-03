@@ -9,28 +9,27 @@ class Day03(AOCSolution):
 
     @property
     def parsed_data(self) -> list[list[int]]:
-        """Parse and return the input data."""
+        """Return list of digits for each row"""
         return [[int(c) for c in row] for row in self.data.splitlines()]
 
     def best_number(self, row: list[int], length: int) -> int:
-        best = [0] * length
-        rowlen = len(row)
-        i = 0
-        for i, x in enumerate(row):
-            for j, y in enumerate(best):
-                if x > y and i < rowlen - (length - 1 - j):
-                    best[j] = x
-                    for u in range(j + 1, length):
-                        best[u] = 0
-                    break
+        """Get maximum subarray of given length from row whilst preserving order"""
+        best: list[int] = []
+        remaining = row
+        for i in range(length):
+            best_digit = max(remaining[:len(remaining) + i + 1 - length])
+            best_index = remaining.index(best_digit)
+            best.append(best_digit)
+            remaining = remaining[best_index + 1:]
+
         return int("".join(map(str, best)))
 
     def part_one(self) -> int:
-        """Solve part one."""
+        """Best 2 digit number"""
         return sum(self.best_number(r, 2) for r in self.parsed_data)
 
     def part_two(self) -> int:
-        """Solve part two."""
+        """Best 12 digit number"""
         return sum(self.best_number(r, 12) for r in self.parsed_data)
 
 
