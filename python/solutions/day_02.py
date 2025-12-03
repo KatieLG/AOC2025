@@ -17,7 +17,7 @@ class Day02(AOCSolution):
     @staticmethod
     def is_repeated_substring(number: int) -> bool:
         """Check if the number is formed from repeating substrings"""
-        return str(number) in f"{number}{number}"[1:-1] 
+        return str(number) in f"{number}{number}"[1:-1]
 
     @property
     def parsed_data(self) -> set[int]:
