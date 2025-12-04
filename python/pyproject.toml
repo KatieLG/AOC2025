@@ -8,6 +8,7 @@ authors = [{ name = "Katie Gardner" }]
 keywords = ["python", "uiua", "advent-of-code", "aoc", "aoc-2025"]
 dependencies = [
     "advent-of-code-data>=2.0.0",
+    "pyuiua>=0.0.9",
     "typer>=0.9.0",
 ]
 

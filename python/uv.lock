@@ -24,6 +24,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "advent-of-code-data" },
+    { name = "pyuiua" },
     { name = "typer" },
 ]
 
@@ -37,6 +38,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "advent-of-code-data", specifier = ">=2.0.0" },
+    { name = "pyuiua", specifier = ">=0.0.9" },
     { name = "typer", specifier = ">=0.9.0" },
 ]
 
@@ -170,6 +172,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/07/56/f013048ac4bc4c1d9be45afd4ab209ea62822fb1598f40687e6bf45dcea4/pytest-9.0.1.tar.gz", hash = "sha256:3e9c069ea73583e255c3b21cf46b8d3c56f6e3a1a8f6da94ccb0fcf57b9d73c8", size = 1564125, upload-time = "2025-11-12T13:05:09.333Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0b/8b/6300fb80f858cda1c51ffa17075df5d846757081d11ab4aa35cef9e6258b/pytest-9.0.1-py3-none-any.whl", hash = "sha256:67be0030d194df2dfa7b556f2e56fb3c3315bd5c8822c6951162b92b32ce7dad", size = 373668, upload-time = "2025-11-12T13:05:07.379Z" },
+]
+
+[[package]]
+name = "pyuiua"
+version = "0.0.9"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/88/e28467f04994978589cfd553c34e3c63066c5e0f207f1b5282003be01db2/pyuiua-0.0.9.tar.gz", hash = "sha256:f7f9b8f48197ae916bfb4370ec441280b45a14b2aa7904110be1306f2993ee89", size = 50313, upload-time = "2025-11-30T22:13:45.254Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1c/7c/007f763b95b1d66c3e31ccdd66f9970705e4866efa667640c4a44c0de800/pyuiua-0.0.9-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:7292e245751221699b8781e71f28d6cd9fc1910fc07f18f843b26c2964fabfc2", size = 10299908, upload-time = "2025-11-30T22:13:43.035Z" },
+    { url = "https://files.pythonhosted.org/packages/39/d5/71030ba487d628e68d5cc13eff44918f6a9ef4db9a1a215fc4a2368fdba3/pyuiua-0.0.9-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:df4f9569cf71c77ab6751a31d9a1f86d96ad0eed3f7f47d414d50abf6ba645db", size = 9495608, upload-time = "2025-11-30T22:13:40.389Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/26/39a3b3a5d39bfbfc3c67069815e19bb0aad8d71443612abc31701d59af98/pyuiua-0.0.9-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2dbb9cba1e93ce6257df4549f9df2507c02ca66359e6d52c449bda03e9858abb", size = 10993129, upload-time = "2025-11-30T22:13:37.62Z" },
+    { url = "https://files.pythonhosted.org/packages/db/9e/c1a25b503f646984e57420f9776c5c74a54c8592e04d27f9b67193215d6c/pyuiua-0.0.9-cp310-abi3-win32.whl", hash = "sha256:764c2ae4733c397a0846aa4c3631d35ac2ad8b305556f1305166611c09e8cf68", size = 8841483, upload-time = "2025-11-30T22:13:49.891Z" },
+    { url = "https://files.pythonhosted.org/packages/97/9f/0fe56ef0ba2e17949892890bfdb8fee03b4a449022460682293d807e8cfd/pyuiua-0.0.9-cp310-abi3-win_amd64.whl", hash = "sha256:6347f571399c6249d2621cd1387076185b47c150863c24239d328f11960c47db", size = 10105605, upload-time = "2025-11-30T22:13:47.123Z" },
 ]
 
 [[package]]

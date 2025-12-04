@@ -22,3 +22,12 @@ sample:
 
 profile:
 	uv run python -m cProfile -s tottime solutions/day_$(day).py | head -n $(maxlogs)
+
+run-hybrid:
+	uv run python -m hybrid_solutions.day_$(day)
+
+sample-hybrid:
+	uv run python -m hybrid_solutions.day_$(day) --sample
+
+profile-hybrid:
+	uv run python -m cProfile -s tottime hybrid_solutions/day_$(day).py | head -n $(maxlogs)
