@@ -1,7 +1,7 @@
-~ "../helpers/input.ua" ~ ReadSample
+~ "../helpers/input.ua" ~ ReadInput
 
 Data ← (
-  ReadSample "day_04"
+  ReadInput "day_04"
   ⊜(=@@)⊸≠@\n
 )
 

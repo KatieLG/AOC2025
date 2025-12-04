@@ -3,8 +3,8 @@ from models.aoc_solution import AOCSolution, Dataset, Part
 
 class Day04(AOCSolution):
     EXPECTED = {
-        Part.PART_ONE: {Dataset.SAMPLE: 13, Dataset.DATA: None},
-        Part.PART_TWO: {Dataset.SAMPLE: 43, Dataset.DATA: None},
+        Part.PART_ONE: {Dataset.SAMPLE: 13, Dataset.DATA: 1437},
+        Part.PART_TWO: {Dataset.SAMPLE: 43, Dataset.DATA: 8765},
     }
 
     def __post_init__(self) -> None:
@@ -19,16 +19,8 @@ class Day04(AOCSolution):
 
     def count_nbrs(self, r: int, c: int) -> int:
         total = 0
-        for y, x in [
-            (r - 1, c),
-            (r + 1, c),
-            (r - 1, c - 1),
-            (r + 1, c + 1),
-            (r, c - 1),
-            (r, c + 1),
-            (r + 1, c - 1),
-            (r - 1, c + 1),
-        ]:
+        nbrs = [(r + i, c + j) for i in range(-1, 2) for j in range(-1, 2) if not i==j==0]
+        for y, x in nbrs:
             if y in range(self.height) and x in range(self.width):
                 total += self.grid[y][x]
         return total
