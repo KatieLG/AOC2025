@@ -17,10 +17,10 @@ class Day03(AOCSolution):
         best: list[int] = []
         remaining = row
         for i in range(length):
-            best_digit = max(remaining[:len(remaining) + i + 1 - length])
+            best_digit = max(remaining[: len(remaining) + i + 1 - length])
             best_index = remaining.index(best_digit)
             best.append(best_digit)
-            remaining = remaining[best_index + 1:]
+            remaining = remaining[best_index + 1 :]
 
         return int("".join(map(str, best)))
 
