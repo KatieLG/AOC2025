@@ -1,10 +1,10 @@
-const parse = (input: string) => {
+const parse = (input: string): [number, number][] => {
   return input
     .split("\n")
     .map((row) => [row[0] === "L" ? -1 : 1, parseInt(row.slice(1))]);
 };
 
-export const part1 = (input: string) => {
+export const part1 = (input: string): number => {
   let position = 50;
   let zeroes = 0;
   parse(input).map(([direction, clicks]) => {
@@ -15,7 +15,7 @@ export const part1 = (input: string) => {
   return zeroes;
 };
 
-export const part2 = (input: string) => {
+export const part2 = (input: string): number => {
   let position = 50;
   let zeroes = 0;
   parse(input).map(([direction, clicks]) => {

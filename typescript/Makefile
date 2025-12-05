@@ -22,11 +22,11 @@ setup:
 		echo "solutions/day_$(day).ts already exists"; \
 	else \
 		printf '%s\n' \
-			'export const part1 = (input: string) => {' \
+			'export const part1 = (input: string): number => {' \
 			'  return input;' \
 			'};' \
 			'' \
-			'export const part2 = (input: string) => {' \
+			'export const part2 = (input: string): number => {' \
 			'  return input;' \
 			'};' > solutions/day_$(day).ts; \
 	fi
