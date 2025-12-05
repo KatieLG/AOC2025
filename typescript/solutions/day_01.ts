@@ -20,7 +20,7 @@ export const part2 = (input: string) => {
   let zeroes = 0;
   parse(input).map(([direction, clicks]) => {
     const clicks_to_next_zero = (10000 - direction * position) % 100;
-    zeroes += - Math.floor((clicks_to_next_zero - clicks) / 100);
+    zeroes += -Math.floor((clicks_to_next_zero - clicks) / 100);
     position += clicks * direction;
     position %= 100;
   });

@@ -1,7 +1,12 @@
 day := $(shell date +%d)
 
+format: 
+	uiua fmt
+
 test:
 	uiua run tests/test_solutions.ua
+
+check: format test
 
 run:
 	uiua run solutions/day_$(day).ua

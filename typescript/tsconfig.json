@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "lib": ["ES2024"],
+    "module": "esnext",
     "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
