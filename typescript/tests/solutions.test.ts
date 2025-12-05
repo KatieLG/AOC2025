@@ -5,6 +5,7 @@ const expected: Record<string, [number | string, number | string]> = {
   day_01: [1023, 5899],
   day_02: [38158151648, 45283684555],
   day_03: [17316, 171741365473332],
+  day_04: [1437, 8765],
   day_05: [782, 353863745078671],
 };
 
