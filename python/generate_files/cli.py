@@ -24,7 +24,7 @@ class Day{day_padded}(AOCSolution):
     }}
 
     @property
-    def parsed_data(self):
+    def parsed_data(self) -> list[str]:
         """Parse and return the input data."""
         return self.data.splitlines()
 
