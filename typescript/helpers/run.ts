@@ -1,4 +1,4 @@
-import { readInput, readSample } from "./input.ts";
+import { readInput, readSample } from "./input";
 
 const useSample = process.env.SAMPLE === "true";
 const dayArg = process.argv[2];
