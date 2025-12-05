@@ -17,24 +17,18 @@ class Day05(AOCSolution):
 
     def part_one(self) -> int:
         """Count all the ingredient IDs that fall into the fresh ranges"""
-        fresh = 0
-        for iid in self.ids:
-            if any((start <= iid <= end) for start, end in self.ranges):
-                fresh += 1
-        return fresh
+        return sum(any(start <= iid <= end for start, end in self.ranges) for iid in self.ids)
 
     def part_two(self) -> int:
         """Count all the IDs in the fresh ranges"""
         total = 0
-        max_covered = -1
-        sorted_ranges = sorted(self.ranges, key=lambda r: r[0])
-        for start, end in sorted_ranges:
-            if max_covered < start:
-                max_covered = end
-                total += end - start + 1
-            elif end > max_covered:
-                total += end - max_covered
-                max_covered = end
+        max_id = 0
+        for start, end in sorted(self.ranges):
+            if max_id > end:
+                continue
+            non_overlapping_start = start if max_id < start else max_id + 1
+            total += end - non_overlapping_start + 1
+            max_id = end
         return total
 
 
