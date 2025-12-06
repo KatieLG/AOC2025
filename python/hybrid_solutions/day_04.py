@@ -1,5 +1,3 @@
-from typing import cast
-
 import pyuiua
 
 from models.aoc_solution import AOCSolution, Dataset, Part
@@ -16,10 +14,21 @@ class Day04(AOCSolution):
         self.height = len(self.grid)
         self.width = len(self.grid[-1])
 
+    def count_nbr_rolls(self, r: int, c: int) -> int:
+        total = 0
+        nbrs = [(r + i, c + j) for i in range(-1, 2) for j in range(-1, 2) if not i == j == 0]
+        for y, x in nbrs:
+            if y in range(self.height) and x in range(self.width):
+                total += self.grid[y][x]
+        return total
+
     def removable(self) -> list[list[int]]:
-        roll_positions = pyuiua.eval("▽⤚(±⊡)♭₂°⊡", self.grid)
-        removable = pyuiua.eval("▽⤚≡⌟(<4⧻(▽⤚⬚0⊡≡⌟+⊂A₂C₂))", roll_positions, self.grid)
-        return removable
+        return [
+            [r, c]
+            for r in range(self.height)
+            for c in range(self.width)
+            if self.grid[r][c] and self.count_nbr_rolls(r, c) < 4
+        ]
 
     def part_one(self) -> int:
         """Count removable rolls"""
