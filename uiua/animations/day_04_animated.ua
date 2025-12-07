@@ -8,4 +8,4 @@
 )
 
 ⇌≡▽₂20 # Scale up by 20
-&fwa "animations/day_04_animated.gif" gif 12
+&fwa "animations/gifs/day_04_animated.gif" gif 12

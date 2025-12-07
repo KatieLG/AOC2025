@@ -21,7 +21,7 @@ Generate ← (
 )
 
 SaveAnimation ← (
-  $"animations/_.gif" # Filename
+  $"animations/gifs/_.gif" # Filename
   &fwa⊙(gif 20 ≡▽₂4)  # Scale up & save
 )
 
