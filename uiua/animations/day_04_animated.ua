@@ -7,5 +7,5 @@
 | >0⧻RPos⊢ # Until no longer possible
 )
 
-⇌≡▽₂3 # Scale up by 3
+⇌≡▽₂20 # Scale up by 20
 &fwa "animations/day_04_animated.gif" gif 12

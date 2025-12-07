@@ -1,22 +1,25 @@
-~ "../solutions/day_07.ua" ~ Data Start Traverse
+~ "../solutions/day_07.ua" ~ Data Nbrs Start Traverse
 
-AddPipe ← ⍜⊡(≡⍥⋅@|⊸=@.)     # Draw pipes at coords
-Draw    ← (⍉⊃[=@S|=@^|=@|]) # Add colours for start, caret & pipe
+AddPipe ← ⍜⊡(≡⍥⋅@|⊸=@.)         # Draw pipes at coords
+Draw    ← (⍉⊃[=@S|=@^|=@|])     # Add colours for start, caret & pipe
+InRange ← <142⊢                 # Check if a coordinate is in grid range
+Next    ← ▽⊸≡InRange◴/◇⊂⊸⍚⌟Nbrs # get all nbrs of all positions
+End     ← >+1/↧≡⊢°□⊓⊣⧻          # Check if all positions have reached the bottom of the grid
 
-GeneratePaths ← (
-  ⊸Traverse Start Data # Traverse through the grid
-  ⍆◴/◇⊂                # Get coordinates of all paths
-  ⊜□⊸≡⊢                # Partition into rows
-  ≡⌟◇AddPipe           # Add pipes to routes
+Generate ← (
+  Start Data           # Get start coord and grid
+  {¤}                  # Accumulator
+  ⍢(⊂⊙(⍜°□Next)⟜⊣|End) # Use current positions to find next positions
+  ≡⌟◇AddPipe           # Place pipes under positions landed on
 )
 
 SaveAnimation ← (
   $"animations/_.gif" # Filename
-  &fwa⊙(gif 12 ≡▽₂27) # Scale up & save
+  &fwa⊙(gif 20 ≡▽₂4)  # Scale up & save
 )
 
-≡Draw GeneratePaths
+≡Draw Generate
 SaveAnimation "day_07_animated_flow"
 
-≡Draw \↥ GeneratePaths # keep history of movement
+≡Draw \↥ Generate # keep history of movement
 SaveAnimation "day_07_animated_history"
