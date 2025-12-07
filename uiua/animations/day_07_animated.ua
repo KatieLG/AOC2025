@@ -1,7 +1,8 @@
-~ "../solutions/day_07.ua" ~ Adj Data Rows Start Valid
+~ "../solutions/day_07.ua" ~ Adj Data Start
 
 AddPipe ← ⍜⊡(≡⍥⋅@|⊸=@.)     # Draw pipes at coords
 Draw    ← (⍉⊃[=@S|=@^|=@|]) # Add colours for start, caret & pipe
+Valid   ← ⊢<⧻Data⊢          # Coordinate is valid
 
 Nbrs ← memo(
   =@^⤚⊡   # Check for caret
@@ -10,7 +11,7 @@ Nbrs ← memo(
   )
 )
 Next ← ▽⊸≡Valid◴/◇⊂⊸⍚⌟Nbrs # get all nbrs of all positions
-End  ← >+1/↧≡⊢°□⊓⊣⧻          # Check if all positions have reached the bottom of the grid
+End  ← >+1/↧≡⊢°□⊓⊣⧻        # Check if all positions have reached the bottom of the grid
 
 Generate ← (
   Start Data           # Get start coord and grid
@@ -21,7 +22,7 @@ Generate ← (
 
 SaveAnimation ← (
   $"animations/gifs/_.gif" # Filename
-  &fwa⊙(gif 20 ≡▽₂4)  # Scale up & save
+  &fwa⊙(gif 25 ≡▽₂4)       # Scale up & save
 )
 
 ≡Draw Generate

@@ -1,23 +1,17 @@
 ~ "../helpers/input.ua" ~ ReadInput
 
 Data ← (
-  ReadInput "day_07"
+  ReadInput"day_07"
   ⊜∘⊸≠@\n
 )
 
-Adj   ← ⊂⊸¯¤0_1 # Left & right offsets
-Start ← ⊢⊚⊸⌕@S  # get start pos
-Rows  ← ⊢△Data  # Number of Rows
-Cols  ← ⊣△Data  # Number of Cols
-Valid ← ⊢<Rows⊢ # Coordinate is valid
+Adj   ← ≡⊂0A₁  # Left & right offsets
+Start ← ⊢⊚⊸⌕@S # get start pos
 
 Timelines ← |2 memo(
-  =@^◡⊡                    # check if non empty space
-  ⨬(⨬0Timelines⊸Valid+1_0  # if it is, return timelines from below
-  | =@^◡⊡                  # check if a caret
-    ⨬(0                    # if not return 0
-    | +1/+≡⌟Timelines+Adj¤ # if it is, get nbrs, and add timelines for each
-    )
+  =@^◡⊡                  # check if a caret
+  ⨬(⍣Timelines0+1_0      # if not, return timelines from below
+  | +1/+≡⌟Timelines+Adj¤ # if it is, get nbrs, and add timelines for each
   )
 )
 
