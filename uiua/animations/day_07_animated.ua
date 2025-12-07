@@ -1,8 +1,7 @@
-~ "../solutions/day_07.ua" ~ Adj Data Rows Start
+~ "../solutions/day_07.ua" ~ Adj Data Rows Start Valid
 
 AddPipe ← ⍜⊡(≡⍥⋅@|⊸=@.)     # Draw pipes at coords
 Draw    ← (⍉⊃[=@S|=@^|=@|]) # Add colours for start, caret & pipe
-InRange ← <Rows⊢            # Check if a coordinate is in grid range
 
 Nbrs ← memo(
   =@^⤚⊡   # Check for caret
@@ -10,7 +9,7 @@ Nbrs ← memo(
   | +Adj¤ # Generate adj caret nbrs
   )
 )
-Next ← ▽⊸≡InRange◴/◇⊂⊸⍚⌟Nbrs # get all nbrs of all positions
+Next ← ▽⊸≡Valid◴/◇⊂⊸⍚⌟Nbrs # get all nbrs of all positions
 End  ← >+1/↧≡⊢°□⊓⊣⧻          # Check if all positions have reached the bottom of the grid
 
 Generate ← (
