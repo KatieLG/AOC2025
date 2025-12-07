@@ -28,13 +28,8 @@ class Day07(AOCSolution):
             return self.timelines(r + 1, c)
 
         if cell == "^":
-            if c > 0 and c < self.cols - 1:
-                self.splits.add((r, c))
-                return 1 + self.timelines(r, c - 1) + self.timelines(r, c + 1)
-            if c > 0:
-                return self.timelines(r, c - 1)
-            if c < self.cols - 1:
-                return self.timelines(r, c + 1)
+            self.splits.add((r, c))
+            return 1 + self.timelines(r, c - 1) + self.timelines(r, c + 1)
 
         return 0
 
