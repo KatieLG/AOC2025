@@ -16,3 +16,7 @@ Advent of Code solutions written in [Uiua](https://www.uiua.org/) version 0.18.0
 ### Day 04 - Removing rolls of paper
 
 ![Day 04](./animations/day_04_animated.gif)
+
+### Day 07 - Moving through laboratories
+
+![Day 07 flow](./animations/day_07_animated_flow.gif) ![Day 07 history](./animations/day_07_animated_history.gif)

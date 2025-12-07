@@ -5,12 +5,11 @@ Data ← (
   ⊜∘⊸≠@\n
 )
 
-Adj   ← ⊟⊡2⟜⊢A₂        # Left & right offsets
-Start ← ⊢⊚⊸⌕@S         # get start pos
-Draw  ← ⍜⊡(≡⍥⋅@|⊸=@.∘) # Draw grid traversal from all paths
-Count ← /+=@^⊡◴/◇⊂     # Count carets in paths
+Adj   ← ⊟⊡2⟜⊢A₂    # Left & right offsets
+Start ← ⊢⊚⊸⌕@S     # get start pos
+Count ← /+=@^⊡◴/◇⊂ # Count carets in paths
 
-Nbrs ← (
+Nbrs ← memo(
   =@^⤚⊡       # Check for caret
   ⨬(≡⊸1 ¤+1_0 # Generate downward nbrs with cost of 1
   | ≡⊸0 +Adj¤ # Generate adj caret nbrs with cost of 0 to ensure all routes generated

@@ -11,6 +11,9 @@ check: format test
 run:
 	uiua run solutions/day_$(day).ua
 
+animate:
+	uiua run animations/day_$(day)_animated.ua
+
 setup:
 	@if [ -f solutions/day_$(day).ua ]; then \
 		echo "solutions/day_$(day).ua already exists"; \
