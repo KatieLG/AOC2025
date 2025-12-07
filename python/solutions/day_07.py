@@ -13,65 +13,39 @@ class Day07(AOCSolution):
         self.grid = [list(row) for row in self.data.splitlines()]
         self.rows = len(self.grid)
         self.cols = len(self.grid[0])
-
-    def iterate(self, r: int, split: bool) -> int:
-        """Iterate either splitting or moving down. Return split count"""
-        splits = 0
-        for c, col in enumerate(self.grid[r]):
-            if not split and col in {"S", "|"} and self.grid[r + 1][c] == ".":
-                self.grid[r + 1][c] = "|"
-            if split and col == "^" and self.grid[r - 1][c] == "|":
-                splits += 1
-                if c - 1 >= 0 and self.grid[r][c - 1] == ".":
-                    self.grid[r][c - 1] = "|"
-                if c + 1 < self.cols and self.grid[r][c + 1] == ".":
-                    self.grid[r][c + 1] = "|"
-        return splits
-
-    def debug(self) -> None:
-        for row in self.grid:
-            print("".join(row))
-
-    def part_one(self) -> int:
-        """Number of splits"""
-        splits = 0
-        for r in range(self.rows - 1):
-            splits += self.iterate(r, True)
-            self.iterate(r, False)
-        #     self.debug()
-        #     print(splits)
-        # self.debug()
-        return splits
+        self.splits: set[tuple[int, int]] = set()
+        self.start = self.grid[0].index("S")
 
     @cache
     def timelines(self, r: int, c: int) -> int:
-        """How many possible timelines from this cell"""
+        """
+        How many possible timelines from this cell
+        Has a side effect of split counting
+        """
         cell = self.grid[r][c]
 
-        if cell in {"|", "S"}:
-            if r < self.rows - 1:
-                return self.timelines(r + 1, c)
-            return 0
+        if cell in {".", "S"} and r < self.rows - 1:
+            return self.timelines(r + 1, c)
 
         if cell == "^":
-            left_ok = c > 0 and self.grid[r][c - 1] == "|"
-            right_ok = c < self.cols - 1 and self.grid[r][c + 1] == "|"
-
-            if left_ok and right_ok:
+            if c > 0 and c < self.cols - 1:
+                self.splits.add((r, c))
                 return 1 + self.timelines(r, c - 1) + self.timelines(r, c + 1)
-            if left_ok:
+            if c > 0:
                 return self.timelines(r, c - 1)
-            if right_ok:
+            if c < self.cols - 1:
                 return self.timelines(r, c + 1)
 
         return 0
 
+    def part_one(self) -> int:
+        """Number of splits"""
+        self.timelines(0, self.start)
+        return len(self.splits)
+
     def part_two(self) -> int:
-        """Number of timelines"""
-        self.part_one()
-        start = self.grid[0].index("S")
-        # self.debug()
-        return 1 + self.timelines(0, start)
+        """Number of timelines from start position"""
+        return 1 + self.timelines(0, self.start)
 
 
 if __name__ == "__main__":
