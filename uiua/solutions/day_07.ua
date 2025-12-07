@@ -1,28 +1,28 @@
-~ "../helpers/input.ua" ~ ReadSample
+~ "../helpers/input.ua" ~ ReadInput
 
 Data ← (
-  ReadSample "day_07"
+  ReadInput "day_07"
   ⊜∘⊸≠@\n
 )
 
-Adj   ← ⊟⊡2⟜⊢A₂    # Left & right offsets
-Start ← ⊢⊚⊸⌕@S     # get start pos
-Count ← /+=@^⊡◴/◇⊂ # Count carets in paths
+Adj   ← ⊂⊸¯¤0_1                # Left & right offsets
+Start ← ⊢⊚⊸⌕@S                 # get start pos
+Rows  ← ⊢△Data                 # Number of Rows
+Cols  ← ⊣△Data                 # Number of Cols
+Valid ← /↧⊃[<Rows⊢|<Cols⊣|≥0⊣] # Coordinate is valid
 
-Nbrs ← memo(
-  =@^⤚⊡       # Check for caret
-  ⨬(≡⊸1 ¤+1_0 # Generate downward nbrs with cost of 1
-  | ≡⊸0 +Adj¤ # Generate adj caret nbrs with cost of 0 to ensure all routes generated
+Timelines ← |2 memo(
+  =@^◡⊡                            # check if non empty space
+  ⨬(⨬(0|Timelines) ⊸Valid+1_0      # if it is, return timelines from below
+  | =@^◡⊡                          # check if a caret
+    ⨬(0                            # if not return 0
+    | +1/+≡⌟Timelines▽⊸≡Valid+Adj¤ # if it is, get nbrs, and add timelines for each
+    )
   )
 )
 
-Traverse ← ⊙◌path(
-  Nbrs
-| =+1⊓⊢⧻ # Keep traversing through grid until bottom row
-)
-
 # Part A
-Count ⊸Traverse Start Data # Count carets hit on all paths
+1660  # TODO
 
 # Part B
-⧻Traverse Start Data # Count the number of traversal paths
++1 Timelines Start Data

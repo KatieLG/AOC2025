@@ -1,10 +1,17 @@
-~ "../solutions/day_07.ua" ~ Data Nbrs Start Traverse
+~ "../solutions/day_07.ua" ~ Adj Data Rows Start
 
-AddPipe ← ⍜⊡(≡⍥⋅@|⊸=@.)         # Draw pipes at coords
-Draw    ← (⍉⊃[=@S|=@^|=@|])     # Add colours for start, caret & pipe
-InRange ← <142⊢                 # Check if a coordinate is in grid range
-Next    ← ▽⊸≡InRange◴/◇⊂⊸⍚⌟Nbrs # get all nbrs of all positions
-End     ← >+1/↧≡⊢°□⊓⊣⧻          # Check if all positions have reached the bottom of the grid
+AddPipe ← ⍜⊡(≡⍥⋅@|⊸=@.)     # Draw pipes at coords
+Draw    ← (⍉⊃[=@S|=@^|=@|]) # Add colours for start, caret & pipe
+InRange ← <Rows⊢            # Check if a coordinate is in grid range
+
+Nbrs ← memo(
+  =@^⤚⊡   # Check for caret
+  ⨬(¤+1_0 # Generate downward nbrs
+  | +Adj¤ # Generate adj caret nbrs
+  )
+)
+Next ← ▽⊸≡InRange◴/◇⊂⊸⍚⌟Nbrs # get all nbrs of all positions
+End  ← >+1/↧≡⊢°□⊓⊣⧻          # Check if all positions have reached the bottom of the grid
 
 Generate ← (
   Start Data           # Get start coord and grid
