@@ -7,7 +7,8 @@ const expected: Record<string, [number | string, number | string]> = {
   day_03: [17316, 171741365473332],
   day_04: [1437, 8765],
   day_05: [782, 353863745078671],
-  day_07: [1660, 305999729392659]
+  day_07: [1660, 305999729392659],
+  day_08: [32103, 8133642976],
 };
 
 for (const [day, [expectedPart1, expectedPart2]] of Object.entries(expected)) {
