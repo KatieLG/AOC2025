@@ -15,8 +15,15 @@ Timelines ← |2 memo(
   )
 )
 
+Splits ← |2 memo(
+  =@^◡⊡                      # check if a caret
+  ⨬(⍣Splits[0_0]+1_0         # if not, return timelines from below
+  | ⊂⊙(◴/◇⊂⍚⌟Splits)⟜(+Adj¤) # if it is, get nbrs, and add timelines for each
+  )
+)
+
 # Part A
-1660 # TODO
+-₁⧻◴Splits Start Data
 
 # Part B
 +1 Timelines Start Data
