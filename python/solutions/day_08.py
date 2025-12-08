@@ -42,49 +42,30 @@ class Day08(AOCSolution):
         return [key for key, _ in sorted(dists.items(), key=lambda pair: -pair[1])]
 
     def append_pair(self, a: Vec, b: Vec) -> None:
-        """Append vectors to circuit & account for circuit joining"""
-        for circ1 in self.circuits:
-            if a in circ1:
-                for circ2 in self.circuits:
-                    if b in circ2:
-                        if circ1 == circ2:
-                            # Nothing happens
-                            return
-                        # Circuits join
-                        self.circuits.remove(circ2)
-                        circ1.update(circ2)
-                        return
-                # b was not in a circuit so it goes with a
-                circ1.add(b)
-                return
-            if b in circ1:
-                for circ2 in self.circuits:
-                    if a in circ2:
-                        if circ1 == circ2:
-                            # Nothing happens
-                            return
-                        # Circuits join
-                        self.circuits.remove(circ2)
-                        circ1.update(circ2)
-                        return
-                # b was not in a circuit so it goes with a
-                circ1.add(a)
-                return
-        # Neither were in a circuit so we get a new circuit
-        self.circuits.append({a, b})
-        return
+        """Find circuits containing a or b and then either:
+        If neither are in a circuit add a new circuit
+        If one of them is in a circuit add the other
+        If both are in circuits join the circuits
+        """
+        matches = [circ for circ in self.circuits if a in circ or b in circ]
+        if len(matches) == 0:
+            self.circuits.append({a, b})
+        elif len(matches) == 1:
+            matches[0] |= {a, b}
+        elif len(matches) == 2:
+            c1, c2 = matches
+            c1 |= c2
+            self.circuits.remove(c2)
 
     def part_one(self) -> int:
         """Largest 3 circuit sizes multiplied together"""
-        counter = 10 if self.sample else 1000
-        while counter:
+        count = 10 if self.sample else 1000
+        for _ in range(count):
             a, b = self.pairs.pop()
             self.append_pair(a, b)
-            counter -= 1
 
         lengths = [len(circ) for circ in self.circuits]
-        best3 = sorted(lengths, reverse=True)[:3]
-        return reduce(lambda x, y: x * y, best3)
+        return reduce(lambda x, y: x * y, sorted(lengths, reverse=True)[:3])
 
     def part_two(self) -> int:
         """Multiply x coords of final boxes to join all circuits"""
