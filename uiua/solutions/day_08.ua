@@ -1,14 +1,15 @@
-~ "../helpers/input.ua" ~ ReadSample
+~ "../helpers/input.ua" ~ ReadInput
 
 Data ← (
-  ReadSample "day_08"
+  ReadInput "day_08"
   ⊜(⊜⋕⊸≠@,)⊸≠@\n
 )
 
-Dist    ← √/+˙×-°⊟         # Distance between a pair of coords
-Pairs   ← ⊏⍏⊸≡Dist⧅<2 Data # Order pairs by distance between them
-Start   ← ⊃{⊢}↘₁ Pairs     # Initial Pairs & Circuits
-Lengths ← ⇌⍆≡°□⍚⧻          # Ordered (desc) Circuit Lengths
+Dist      ← √/+˙×-°⊟         # Distance between a pair of coords
+NumCoords ← ⧻Data            # Number of coordinates
+Pairs     ← ⊏⍏⊸≡Dist⧅<2 Data # Order pairs by distance between them
+Start     ← ⊃{⊢}↘₁ Pairs     # Initial Pairs & Circuits
+Lengths   ← ⇌⍆≡°□⍚⧻          # Ordered (desc) Circuit Lengths
 
 Loop ← (
   ⊙⊃⊢↘₁                # Get next pair and remove from list
@@ -22,4 +23,7 @@ Loop ← (
 )
 
 # Part A
-/×↙₃ Lengths⊙◌⍥(Loop)9 Start # Loop 9 times (to make 10 total) them mult length of top 3
+/×↙₃ Lengths⊙◌⍥(Loop)999 Start # Loop 999 times (to make 1000 total) them mult length of top 3
+
+# Part B
+⊢/×⋅⊢ ⍢(Loop|<NumCoords⧻°□⊢⊙◌Loop) Start # Loop until the first circuit would contain everything then mult x coords
