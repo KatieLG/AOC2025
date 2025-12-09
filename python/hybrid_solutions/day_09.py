@@ -1,9 +1,10 @@
-from re import I
-from time import perf_counter
-from models.aoc_solution import AOCSolution, Dataset, Part
 import itertools
+
 import matplotlib.pyplot as plt
 from pyuiua import Uiua
+
+from models.aoc_solution import AOCSolution, Dataset, Part
+
 
 class Day09(AOCSolution):
     EXPECTED = {
@@ -22,8 +23,7 @@ GenGreen ← ⍆◴⊂/◇⊂⍚Green⊸⧈∘2 ⊂⊸⊣  # All green and red t
 All      ← GenGreen
 All """)
         self.all = {(int(a), int(b)) for row in self.uiua.pop() for a, b in [row]}
-        
-        
+
     @staticmethod
     def area(a: tuple[int, int], b: tuple[int, int]) -> int:
         """Area between two tiles"""
@@ -48,7 +48,6 @@ All """)
         #     c2 = b[0], a[1]
         if self.sample:
             return 24
-            
 
         # return max(areas)
         xs = [p[0] for p in self.all]
@@ -58,8 +57,8 @@ All """)
         plt.scatter(xs, ys, color="yellow")
         plt.scatter(rxs, rys, color="blue")
         plt.grid(True)
-        plt.savefig('aocday9.png', dpi=300, bbox_inches='tight')
-        plt.show() 
+        plt.savefig("aocday9.png", dpi=300, bbox_inches="tight")
+        plt.show()
         # by inspection the largest rectangle will have a y coord of either 50110 with corners above OR 48656 with corners below
         # so assume one lies on that line then move round circle calculating areas
         # by inspection we definitely want one of the points with an x coord of (94865)
@@ -71,12 +70,15 @@ All """)
         for a in self.parsed_data:
             if m[1] < a[1]:
                 other_corner = (m[0], a[1])
-                if other_corner in self.all or any(other_corner[0] < p[0] and other_corner[1] < p[1] for p in self.all): # check that the other coordinate is within the perimeter
+                if other_corner in self.all or any(
+                    other_corner[0] < p[0] and other_corner[1] < p[1] for p in self.parsed_data
+                ):  # check that the other coordinate is within the perimeter
                     areas[(a, m)] = self.area(a, m)
 
         best = max(areas.items(), key=lambda pair: pair[1])
         print(best)
         return best[1]
-      
+
+
 if __name__ == "__main__":
     Day09().run()
