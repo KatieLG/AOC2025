@@ -27,19 +27,19 @@ class Machine:
             state[bt] = 1 - state[bt]
         return state
 
-    def trigger(self, button: list[int], times: int = 1) -> None:
+    @staticmethod
+    def trigger(jolts: list[int], button: Iterable[int], times: int = 1) -> list[int]:
         """Push a button like (0, 3, 4) some number of times to increase the current joltage"""
+        state = jolts[:]
         for bt in button:
-            self.jolts[bt] += times
+            state[bt] += times
+        return state
 
     def find_shortest_solution(self) -> int:
         """
         Toggling the lights until they match the target, whats the shortest solution
         Should only ever need to press a button once, so worst case scenario is pushing them all
         """
-        if self.lights == self.target:
-            return 0
-
         queue = deque()
         queue.append((self.lights, set()))
         seen = set()
@@ -49,39 +49,37 @@ class Machine:
             lights, curr = queue.popleft()
             if lights == self.target:
                 return len(curr)
+            if tuple(lights) in seen: 
+                continue
+            seen.add(tuple(lights))
             for button in self.schematics:
                 if not button in curr:
                     toggled = self.toggle(lights, button)
-                    key = tuple(toggled)
-                    if key not in seen:
-                        seen.add(key)
-                        queue.append((toggled, {*curr, button}))
+                    queue.append((toggled, {*curr, button}))
 
         raise ValueError("No solution found")
 
-        # def find_shortest_joltage_solution(self) -> int:
+    def find_shortest_joltage_solution(self) -> int:
         """
         Toggle lights until they reach reuired joltage
         Each button needs pushing a multiple of times
         """
-        if self.jolts == self.jolts_target:
-            return 0
-
         queue = deque()
-        queue.extend([[button] for button in self.schematics])
+        queue.append((self.jolts, []))
+        seen = set()
 
         while queue:
-            # current queue item is buttons pressed so far
-            curr = queue.popleft()
-            for bt in curr:
-                self.toggle(bt)
-            if self.jolts == self.jolts_target:
+            # current queue item is state & [(button, times)] pressed so far
+            jolts, curr = queue.popleft()
+            if jolts == self.jolts_target:
                 return len(curr)
+            if tuple(jolts) in seen: 
+                continue
+            seen.add(tuple(jolts))
             for button in self.schematics:
-                if not button in curr:
-                    queue.append([*curr, button])
-            for bt in curr:
-                self.toggle(bt)
+                triggered = self.trigger(jolts, button)
+                queue.append((triggered, [*curr, button]))
+
 
         raise ValueError("No solution found")
 
@@ -103,7 +101,7 @@ class Day10(AOCSolution):
 
     def part_two(self) -> int:
         """Find the shortest button presses per machine for jolts to reach target state"""
-        return 33
+        print(self.machines[0].find_shortest_joltage_solution())
         return sum(machine.find_shortest_joltage_solution() for machine in self.machines)
 
 
