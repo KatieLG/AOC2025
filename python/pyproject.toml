@@ -10,6 +10,8 @@ dependencies = [
     "advent-of-code-data>=2.0.0",
     "matplotlib>=3.10.7",
     "pyuiua>=0.0.9",
+    "scipy>=1.16.3",
+    "sympy>=1.14.0",
     "typer>=0.9.0",
 ]
 

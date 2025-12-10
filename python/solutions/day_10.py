@@ -2,6 +2,9 @@ import re
 from collections import deque
 from typing import Iterable
 
+import numpy as np
+import scipy
+
 from models.aoc_solution import AOCSolution, Dataset, Part
 
 
@@ -49,11 +52,11 @@ class Machine:
             lights, curr = queue.popleft()
             if lights == self.target:
                 return len(curr)
-            if tuple(lights) in seen: 
+            if tuple(lights) in seen:
                 continue
             seen.add(tuple(lights))
             for button in self.schematics:
-                if not button in curr:
+                if button not in curr:
                     toggled = self.toggle(lights, button)
                     queue.append((toggled, {*curr, button}))
 
@@ -64,35 +67,31 @@ class Machine:
         Toggle lights until they reach reuired joltage
         Each button needs pushing a multiple of times
         """
-        queue = deque()
-        queue.append((self.jolts, []))
-        seen = set()
-
-        while queue:
-            # current queue item is state & [(button, times)] pressed so far
-            jolts, curr = queue.popleft()
-            if jolts == self.jolts_target:
-                return len(curr)
-            if tuple(jolts) in seen: 
-                continue
-            seen.add(tuple(jolts))
-            for button in self.schematics:
-                triggered = self.trigger(jolts, button)
-                queue.append((triggered, [*curr, button]))
-
-
-        raise ValueError("No solution found")
+        button_vectors = [self.trigger(self.jolts, button) for button in self.schematics]
+        btn_matrix = np.array(button_vectors).T
+        sln_vector = np.array(self.jolts_target)
+        minimisation_vector = np.ones(btn_matrix.shape[1])  # for minimising coefficients
+        bounds = [(0, None)] * btn_matrix.shape[1]  # 0 as lower bound, nothing as upper bound
+        integrality = [1] * btn_matrix.shape[1]  # enforce ints for all coefficients
+        result = scipy.optimize.linprog(
+            minimisation_vector,
+            A_eq=btn_matrix,
+            b_eq=sln_vector,
+            bounds=bounds,
+            integrality=integrality,
+        )
+        return int(sum(result.x))
 
 
 class Day10(AOCSolution):
     EXPECTED = {
         Part.PART_ONE: {Dataset.SAMPLE: 7, Dataset.DATA: 514},
-        Part.PART_TWO: {Dataset.SAMPLE: 33, Dataset.DATA: None},
+        Part.PART_TWO: {Dataset.SAMPLE: 33, Dataset.DATA: 21824},
     }
 
     def __post_init__(self) -> None:
         self.machines: list[Machine] = []
-        for match in re.findall(r"(\[[\.#]*\])((\s*\([\d,]*\))*)\s*({[\d,]*})", self.data):
+        for match in re.findall(r"(\[[.#]*])((\s*\([\d,]*\))*)\s*({[\d,]*})", self.data):
             self.machines.append(Machine(match))
 
     def part_one(self) -> int:
@@ -101,7 +100,6 @@ class Day10(AOCSolution):
 
     def part_two(self) -> int:
         """Find the shortest button presses per machine for jolts to reach target state"""
-        print(self.machines[0].find_shortest_joltage_solution())
         return sum(machine.find_shortest_joltage_solution() for machine in self.machines)
 
 
