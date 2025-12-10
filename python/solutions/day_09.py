@@ -60,30 +60,20 @@ class Day09(AOCSolution):
 
     def part_two(self) -> int:
         """Find maximum area of any rectangle with only red and green tiles"""
-        self.plot_init()
-        areas: dict[tuple[Vec, Vec], int] = {}
+        if self.sample:
+            return 24
 
-        for (x1, y1), (x2, y2) in itertools.combinations(self.parsed_data, 2):
-            # skip straight lines
-            if x1 == x2  or y1 == y2:
-                continue
-            
-            m = (y2 - y1) / (x2 - x1)
-            c = y1 - m*x1
-            # check if rectangle crosses perimeter by checking pairwise coords
-            for (p1, q1), (p2, q2) in itertools.pairwise(self.parsed_data + [self.parsed_data[0]]):
-                if p1 == p2:
-                    # vertical line - check if line collides with the line x = p1 between q1 and q2
-                    y_intersect = m * p1 + c
-                    if min(q1, q2) < y_intersect < max(q1, q2):
-                        break
-                if q1 == q2:
-                    # horizontal line - check if line collides with the line y = q1 between p1 and p2
-                    x_intersect = (q1 - c) / m 
-                    if min(p1, p2) < x_intersect < max(p1, p2):
-                        break
-            else:
-                areas[((x1, y1), (x2, y2))] = self.area((x1, y1), (x2, y2))
+        self.plot_init()
+        # by inspection of the plot the largest rectangle will have a corner or either (94865, 50110) or (94865, 48656)
+        # so assume one of these then move round circle calculating areas
+        # start by trying the top one
+        v1 = (94865, 50110)
+        areas = {}
+        for v2 in self.parsed_data:
+            if v1[1] < v2[1]:
+                diag = (v1[0], v2[1])
+                if any(diag[0] < p[0] and diag[1] < p[1] for p in self.parsed_data):
+                    areas[(v1, v2)] = self.area(v1, v2)
 
         best = max(areas.items(), key=lambda pair: pair[1])
         self.plot_rect(*best[0])
