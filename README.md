@@ -24,6 +24,12 @@ Code to generate animations is [here](/uiua/animations/)
   <img src="/uiua/animations/gifs/day_07_animated_history.gif" alt="Day 07 history" width="49%">
 </p>
 
+### Day 10 - Lights turning on
+
+<p>
+    <img src="/uiua/animations/gifs/day_10_animated.gif" alt="Day 10" style="width: 99">
+</p>
+
 ## Other Visualisations
 
 ### Day 09 - Finding largest regtangle inside the perimeter

@@ -29,5 +29,5 @@ Advent of Code solutions written in [Uiua](https://www.uiua.org/) version 0.18.0
 ### Day 10 - Lights turning on
 
 <p>
-    <img src="./animations/gifs/day_10_animated.gif" alt="Day 10" style="width: 99%;">
+    <img src="./animations/gifs/day_10_animated.gif" alt="Day 10" style="width: 99%">
 </p>
