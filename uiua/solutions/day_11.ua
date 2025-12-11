@@ -7,23 +7,22 @@ Data ← (
   ⊜Parse⊸≠@\n
 )
 
-Inputs  ← ≡(°□⊢) Data                  # Normal array of inputs
-Pos     ← ⍣(⊢⊢|⧻Inputs)⊚⌕              # Find arr position in inputs or return length of inputs
-Outputs ← ≡⊣ Data                      # Boxed array of outputs
-Nbrs    ← memo(°□˜⊡Outputs˜Pos Inputs) # Find outputs of a given input
-Paths!  ← path(≡⊸0 ⍣Nbrs[]|≍^0)        # add all outputs with cost 0, with goal of matching end pos
+Inputs  ← ≡(°□⊢) Data                         # Normal array of inputs
+Outputs ← ≡⊣ Data                             # Boxed array of outputs
+Pos     ← ⊢⊢⊚⌕                                # Find arr position in inputs 
+Nbrs    ← memo(°□˜⊡Outputs˜Pos Inputs)        # Find outputs of a given input
+Paths   ← |2 memo(⨬(⍣(/+≡⌟Paths Nbrs|0)|1)◡≍) # Memoised path counter
 
 # Part A
-⊓⧻◌ Paths!"out" "you" # paths from "you" to "out"
+Paths "you" "out"
 
 # Part B
-# ⊓⧻◌ Paths!"fft" "svr" # paths from svr to fft
-# ⊓⧻◌ Paths!"dac" "fft" # paths from fft to dac
-# ⊓⧻◌ Paths!"out" "dac" # paths from dac to out
-# ××                    # total paths: svr -> fft -> out
-
-# ⊓⧻◌ Paths!"fft" "svr" # paths from svr to dac
-# ⊓⧻◌ Paths!"fft" "dac" # paths from dac to fft
-# ⊓⧻◌ Paths!"out" "fft" # paths from fft to out
-# ××                    # total paths: svr -> dac -> fft -> out
-# ⊸+                    # Grand total
+Paths "svr" "fft" # paths from svr to fft
+Paths "fft" "dac" # paths from fft to dac
+Paths "dac" "out" # paths from dac to out
+××                # total paths: svr -> fft -> out
+Paths "svr" "dac" # paths from svr to dac
+Paths "dac" "fft" # paths from dac to fft
+Paths "fft" "out" # paths from fft to out
+××                # total paths: svr -> dac -> fft -> out
++                 # Grand total
