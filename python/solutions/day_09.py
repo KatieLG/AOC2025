@@ -58,22 +58,41 @@ class Day09(AOCSolution):
             )
         )
 
+    def intersects(self, p1: Vec, p2: Vec, q1: Vec, q2: Vec) -> bool:
+        """Check if corners p1, p2 intersect the pairwise line between q1, q2"""
+        minx, maxx = sorted([p1[0], p2[0]])
+        miny, maxy = sorted([p1[1], p2[1]])
+        mina, maxa = sorted([q1[0], q2[0]])
+        minb, maxb = sorted([q1[1], q2[1]])
+
+        if mina == maxa:
+            # Vertical line - check if it intersects top or bottom of rectangle
+            if minx < mina < maxx and (minb < miny < maxb or minb < maxy < maxb):
+                return True
+            # check if it is inside rectangle
+            if minx < mina < maxx and (miny <= minb < maxy or miny < maxb <= maxy):
+                return True
+        if minb == maxb:
+            # Horizontal line - check if intersects left or right of rectangle
+            if miny < minb < maxy and (mina < minx < maxa or mina < maxx < maxa):
+                return True
+            # check if inside rectangle
+            if miny < minb < maxy and (minx <= mina < maxx or minx < maxa <= maxx):
+                return True
+        return False
+
     def part_two(self) -> int:
         """Find maximum area of any rectangle with only red and green tiles"""
-        if self.sample:
-            return 24
-
         self.plot_init()
-        # by inspection of the plot the largest rectangle will have a corner or either (94865, 50110) or (94865, 48656)
-        # so assume one of these then move round circle calculating areas
-        # start by trying the top one
-        v1 = (94865, 50110)
         areas = {}
-        for v2 in self.parsed_data:
-            if v1[1] < v2[1]:
-                diag = (v1[0], v2[1])
-                if any(diag[0] < p[0] and diag[1] < p[1] for p in self.parsed_data):
-                    areas[(v1, v2)] = self.area(v1, v2)
+        for p1, p2 in itertools.combinations(self.parsed_data, 2):
+            # check if the rectangle with corners p1, p2 intersect the perimeter (any pairwise line)
+            for q1, q2 in itertools.pairwise(self.parsed_data + [self.parsed_data[0]]):
+                if self.intersects(p1, p2, q1, q2):
+                    break
+            else:
+                # No intersections = its valid
+                areas[(p1, p2)] = self.area(p1, p2)
 
         best = max(areas.items(), key=lambda pair: pair[1])
         self.plot_rect(*best[0])
