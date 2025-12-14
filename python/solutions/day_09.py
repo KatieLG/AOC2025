@@ -58,41 +58,23 @@ class Day09(AOCSolution):
             )
         )
 
-    def intersects(self, p1: Vec, p2: Vec, q1: Vec, q2: Vec) -> bool:
-        """Check if corners p1, p2 intersect the pairwise line between q1, q2"""
-        minx, maxx = sorted([p1[0], p2[0]])
-        miny, maxy = sorted([p1[1], p2[1]])
-        mina, maxa = sorted([q1[0], q2[0]])
-        minb, maxb = sorted([q1[1], q2[1]])
-
-        if mina == maxa and minx < mina < maxx:
-            # Vertical line - check if it intersects top or bottom of rectangle
-            if minb < miny < maxb or minb < maxy < maxb:
-                return True
-            # check if it is inside rectangle
-            if miny <= minb < maxy or miny < maxb <= maxy:
-                return True
-        if minb == maxb and miny < minb < maxy:
-            # Horizontal line - check if intersects left or right of rectangle
-            if mina < minx < maxa or mina < maxx < maxa:
-                return True
-            # check if inside rectangle
-            if minx <= mina < maxx or minx < maxa <= maxx:
-                return True
-        return False
-
     def part_two(self) -> int:
         """Find maximum area of any rectangle with only red and green tiles"""
         self.plot_init()
         areas = {}
-        for p1, p2 in itertools.combinations(self.parsed_data, 2):
-            # check if the rectangle with corners p1, p2 intersect the perimeter (any pairwise line)
-            for q1, q2 in itertools.pairwise(self.parsed_data + [self.parsed_data[0]]):
-                if self.intersects(p1, p2, q1, q2):
+        for c1, c2 in itertools.combinations(self.parsed_data, 2):
+            x1, x2 = sorted([c1[0], c2[0]])
+            y1, y2 = sorted([c1[1], c2[1]])
+            # check if the rectangle with these corners intersects the perimeter (any pairwise line)
+            for (p1, q1), (p2, q2) in map(
+                sorted, itertools.pairwise(self.parsed_data + [self.parsed_data[0]])
+            ):
+                # if perimeter x goes between rectangle x & perimeter y goes between rectangle y
+                if p1 < x2 and p2 > x1 and q1 < y2 and q2 > y1:
                     break
             else:
                 # No intersections = its valid
-                areas[(p1, p2)] = self.area(p1, p2)
+                areas[(c1, c2)] = self.area(c1, c2)
 
         best = max(areas.items(), key=lambda pair: pair[1])
         self.plot_rect(*best[0])
