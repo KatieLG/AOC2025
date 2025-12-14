@@ -65,19 +65,19 @@ class Day09(AOCSolution):
         mina, maxa = sorted([q1[0], q2[0]])
         minb, maxb = sorted([q1[1], q2[1]])
 
-        if mina == maxa:
+        if mina == maxa and minx < mina < maxx:
             # Vertical line - check if it intersects top or bottom of rectangle
-            if minx < mina < maxx and (minb < miny < maxb or minb < maxy < maxb):
+            if minb < miny < maxb or minb < maxy < maxb:
                 return True
             # check if it is inside rectangle
-            if minx < mina < maxx and (miny <= minb < maxy or miny < maxb <= maxy):
+            if miny <= minb < maxy or miny < maxb <= maxy:
                 return True
-        if minb == maxb:
+        if minb == maxb and miny < minb < maxy:
             # Horizontal line - check if intersects left or right of rectangle
-            if miny < minb < maxy and (mina < minx < maxa or mina < maxx < maxa):
+            if mina < minx < maxa or mina < maxx < maxa:
                 return True
             # check if inside rectangle
-            if miny < minb < maxy and (minx <= mina < maxx or minx < maxa <= maxx):
+            if minx <= mina < maxx or minx < maxa <= maxx:
                 return True
         return False
 
