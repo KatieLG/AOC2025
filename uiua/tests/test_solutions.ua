@@ -65,7 +65,9 @@ now
 ~ "../solutions/day_08.ua"
 TestDay 8
 
-SkipDay 9 Missingb
+now
+~ "../solutions/day_09.ua"
+TestDay 9
 
 SkipDay 10 NoSolution
 
