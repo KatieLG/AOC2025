@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { readInput } from "../helpers/input.js";
 
-const expected: Record<string, [number | string, number | string]> = {
+const expected: Record<string, [number, number | null]> = {
   day_01: [1023, 5899],
   day_02: [38158151648, 45283684555],
   day_03: [17316, 171741365473332],
@@ -11,6 +11,7 @@ const expected: Record<string, [number | string, number | string]> = {
   day_08: [32103, 8133642976],
   day_09: [4758121828, 1577956170],
   day_11: [470, 384151614084875],
+  day_12: [575, null],
 };
 
 for (const [day, [expectedPart1, expectedPart2]] of Object.entries(expected)) {
