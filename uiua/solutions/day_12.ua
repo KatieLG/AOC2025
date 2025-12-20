@@ -1,7 +1,7 @@
 ~ "../helpers/input.ua" ~ ReadInput
 
-Req  ← ⊙(⊜⋕⊸≠@ )⊟∩⋕°$"_x_: _"    # Parse a requirement line
-Gift ← ⊜(≠@#)?⊸≠@\n↘+₁⊸(˜⨂@\n)↘1 # Parse a gift line
+Req  ← ⊙(⊜⋕⊸≠@ )⊟∩⋕°$"_x_: _"   # Parse a requirement line
+Gift ← ⊜(≠@#)⊸≠@\n↘+₁⊸(˜⨂@\n)↘1 # Parse a gift line
 
 Data ← (
   ReadInput "day_12"
