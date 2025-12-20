@@ -11,8 +11,8 @@ MJ    ← ⊜(/↥Nums)⊸≠@\nJolts     # Max Jolts across all machine
 ⊜(□Btns)⊸≠@\nSchem     # Parse buttons for all machines
 ⊜(□Nums)⊸≠@\nSolutions # Parse all the solutions
 
-⬚0∧/◇⊂⍚(≡⍉⍉¤\+▽) # lets gooo
-⍉⍉⊢⍉⍉            # join up elements
-Color            # Colour it
-≡Scale           # Scale
+≡\↥⬚0∧/◇⊂⍚(≡⍉⍉¤\+▽) # lets gooo
+⍉⍉⊢⍉⍉               # join up elements
+Color               # Colour it
+≡Scale              # Scale
 &fwa "animations/gifs/day_10_animated.gif" gif 25
