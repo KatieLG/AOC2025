@@ -26,7 +26,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install Uiua
-        run: cargo install uiua --version 0.18.0-dev.3
+        run: cargo install uiua --version 0.18.0-dev.4
 
       - name: Run uiua tests
         run: uiua run tests/test_solutions.ua
