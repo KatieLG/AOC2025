@@ -13,6 +13,12 @@ Advent of Code solutions written in [Uiua](https://www.uiua.org/) version 0.18.0
 
 ## Animations
 
+### Day 01 - Dial rotations
+
+<p>
+    <img src="./animations/gifs/day_01_animated.gif" alt="Day 01" style="width: 99%;">
+</p>
+
 ### Day 04 - Removing rolls of paper
 
 <p>
